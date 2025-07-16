@@ -1,0 +1,22 @@
+{
+  "tokens": {
+    "token_a": "PERSONAL_TOKEN_A",
+    "token_b": "PERSONAL_TOKEN_B"
+  },
+  "themes": {
+    "unified": "gradient"
+  },
+  "settings": {
+    "include_private": true,
+    "include_all_commits": true,
+    "show_icons": true,
+    "hide_border": true,
+    "update_frequency": "daily",
+    "unified_view": true
+  },
+  "profile": {
+    "name": "[Your Name]",
+    "title": "A passionate [Your Title]",
+    "linkedin": "[YOUR_LINKEDIN_URL]"
+  }
+} 

@@ -1,0 +1,48 @@
+name: Update README with GitHub Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Diario a medianoche
+  workflow_dispatch:     # Permite ejecución manual
+  push:
+    paths:
+      - '.github/workflows/update-readme.yml'
+      - 'README.md'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install requests
+          pip install PyGithub
+          
+      - name: Generate README with stats
+        env:
+          PERSONAL_TOKEN_A: ${{ secrets.PERSONAL_TOKEN_A }}
+          PERSONAL_TOKEN_B: ${{ secrets.PERSONAL_TOKEN_B }}
+          USERS: ${{ vars.USERS || '' }}
+          ORGANIZATIONS: ${{ secrets.ORGANIZATIONS || '' }}
+        run: |
+          python .github/scripts/generate_readme.py
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "📊 Update README with latest GitHub stats [skip ci]"
+          git push 
