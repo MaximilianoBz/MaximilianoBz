@@ -57,71 +57,17 @@ def get_token_for_user(username):
     return None
 
 def get_combined_stats():
-    """Get combined statistics from both accounts"""
-    base_url = "https://github-readme-stats.vercel.app/api"
+    """Get combined statistics from all accounts"""
+    # Since GitHub stats API doesn't support multiple usernames in one URL,
+    # we'll show stats for each account separately
+    stats_urls = []
     
-    # Use the primary account for combined stats
-    if not USERS:
-        raise ValueError("No users configured")
+    for i, username in enumerate(USERS):
+        token = get_token_for_user(username)
+        stats_url = get_github_stats(username, token)
+        stats_urls.append(stats_url)
     
-    params = {
-        'username': USERS[0],  # First user
-        'show_icons': 'true',
-        'theme': 'gradient',
-        'hide_border': 'true',
-        'include_all_commits': 'true',
-        'count_private': 'true'
-    }
-    
-    # Use the appropriate token for the primary account
-    token = get_token_for_user(USERS[0])
-    if token:
-        params['token'] = token
-    
-    response = requests.get(f"{base_url}", params=params)
-    return response.url
-
-def get_top_languages(username, token=None):
-    """Get top languages for a user"""
-    base_url = "https://github-readme-stats.vercel.app/api/top-langs"
-    
-    params = {
-        'username': username,
-        'layout': 'compact',
-        'theme': 'gradient',
-        'hide_border': 'true',
-        'count_private': 'true'
-    }
-    
-    if token:
-        params['token'] = token
-    
-    response = requests.get(base_url, params=params)
-    return response.url
-
-def get_combined_top_languages():
-    """Get combined top languages from both accounts"""
-    base_url = "https://github-readme-stats.vercel.app/api/top-langs"
-    
-    # Use the primary account for combined stats
-    if not USERS:
-        raise ValueError("No users configured")
-    
-    params = {
-        'username': USERS[0],  # First user
-        'layout': 'compact',
-        'theme': 'gradient',
-        'hide_border': 'true',
-        'count_private': 'true'
-    }
-    
-    # Use the appropriate token for the primary account
-    token = get_token_for_user(USERS[0])
-    if token:
-        params['token'] = token
-    
-    response = requests.get(base_url, params=params)
-    return response.url
+    return stats_urls
 
 def get_streak_stats(username, token=None):
     """Get streak statistics for a user"""
@@ -140,26 +86,17 @@ def get_streak_stats(username, token=None):
     return response.url
 
 def get_combined_streak():
-    """Get combined streak from both accounts"""
-    base_url = "https://github-readme-streak-stats.herokuapp.com"
+    """Get combined streak from all accounts"""
+    # Since GitHub streak API doesn't support multiple usernames in one URL,
+    # we'll show streak for each account separately
+    streak_urls = []
     
-    # Use the primary account for combined stats
-    if not USERS:
-        raise ValueError("No users configured")
+    for i, username in enumerate(USERS):
+        token = get_token_for_user(username)
+        streak_url = get_streak_stats(username, token)
+        streak_urls.append(streak_url)
     
-    params = {
-        'user': USERS[0],  # First user
-        'theme': 'gradient',
-        'hide_border': 'true'
-    }
-    
-    # Use the appropriate token for the primary account
-    token = get_token_for_user(USERS[0])
-    if token:
-        params['token'] = token
-    
-    response = requests.get(base_url, params=params)
-    return response.url
+    return streak_urls
 
 def get_trophy_stats(username, token=None):
     """Get trophy statistics for a user"""
@@ -177,23 +114,17 @@ def get_trophy_stats(username, token=None):
     return response.url
 
 def get_combined_trophies():
-    """Get combined trophies from both accounts"""
-    base_url = "https://github-profile-trophy.vercel.app"
+    """Get combined trophies from all accounts"""
+    # Since GitHub trophy API doesn't support multiple usernames in one URL,
+    # we'll show trophies for each account separately
+    trophy_urls = []
     
-    # Use the primary account for combined stats
-    if not USERS:
-        raise ValueError("No users configured")
+    for i, username in enumerate(USERS):
+        token = get_token_for_user(username)
+        trophy_url = get_trophy_stats(username, token)
+        trophy_urls.append(trophy_url)
     
-    params = {
-        'username': USERS[0],  # First user
-        'theme': 'gradient',
-        'no-frame': 'true',
-        'no-bg': 'false',
-        'margin-w': '4'
-    }
-    
-    response = requests.get(base_url, params=params)
-    return response.url
+    return trophy_urls
 
 def get_organization_stats(org_name):
     """Get organization statistics"""
@@ -219,45 +150,90 @@ def get_organization_stats(org_name):
 def generate_readme_content():
     """Generate the complete README content"""
     
+    # Load config for profile info
+    try:
+        with open('.github/scripts/config.json', 'r') as f:
+            config = json.load(f)
+        profile_name = config.get('profile', {}).get('name', '[Your Name]')
+        profile_title = config.get('profile', {}).get('title', 'A passionate [Your Title]')
+        profile_linkedin = config.get('profile', {}).get('linkedin', '[YOUR_LINKEDIN_URL]')
+    except:
+        profile_name = '[Your Name]'
+        profile_title = 'A passionate [Your Title]'
+        profile_linkedin = '[YOUR_LINKEDIN_URL]'
+    
     # Header
-    content = """<h1 align="center">Hi, I'm [Your Name]</h1>
-<h3 align="center">A passionate [Your Title]</h3>
+    content = f"""<h1 align="center">Hi, I'm {profile_name}</h1>
+<h3 align="center">{profile_title}</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=[YOUR_USERNAME]&label=Profile%20views&color=0e75b6&style=flat" alt="[YOUR_USERNAME]" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username={USERS[0] if USERS else '[YOUR_USERNAME]'}&label=Profile%20views&color=0e75b6&style=flat" alt="{USERS[0] if USERS else '[YOUR_USERNAME]'}" /> </p>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="[YOUR_LINKEDIN_URL]" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="[YOUR_USERNAME]" height="30" width="40" /></a>
+<a href="{profile_linkedin}" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="{USERS[0] if USERS else '[YOUR_USERNAME]'}" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">📊 GitHub Statistics:</h3>
 
 """
     
-    # Combined Statistics (unified view)
-    content += "<p align=\"left\">\n"
+    # Individual Account Statistics
+    if len(USERS) > 1:
+        content += "<h4 align=\"left\">📈 Individual Account Stats:</h4>\n\n"
+        
+        for i, username in enumerate(USERS):
+            token = get_token_for_user(username)
+            
+            # GitHub Stats for this account
+            stats_url = get_github_stats(username, token)
+            content += f"<p align=\"left\">\n"
+            content += f'  <img src="{stats_url}" alt="GitHub Stats - {username}" />\n'
+            content += "</p>\n\n"
+            
+            # Streak Stats for this account
+            streak_url = get_streak_stats(username, token)
+            content += f"<p align=\"left\">\n"
+            content += f'  <img src="{streak_url}" alt="GitHub Streak - {username}" />\n'
+            content += "</p>\n\n"
+            
+            # Trophy Stats for this account
+            trophy_url = get_trophy_stats(username, token)
+            content += f"<p align=\"left\">\n"
+            content += f'  <img src="{trophy_url}" alt="GitHub Trophies - {username}" />\n'
+            content += "</p>\n\n"
+    else:
+        # Single account - show unified stats
+        username = USERS[0] if USERS else '[YOUR_USERNAME]'
+        token = get_token_for_user(username)
+        
+        # GitHub Stats
+        stats_url = get_github_stats(username, token)
+        content += f"<p align=\"left\">\n"
+        content += f'  <img src="{stats_url}" alt="GitHub Stats" />\n'
+        content += "</p>\n\n"
+        
+        # Streak Stats
+        streak_url = get_streak_stats(username, token)
+        content += f"<p align=\"left\">\n"
+        content += f'  <img src="{streak_url}" alt="GitHub Streak" />\n'
+        content += "</p>\n\n"
+        
+        # Trophy Stats
+        trophy_url = get_trophy_stats(username, token)
+        content += f"<p align=\"left\">\n"
+        content += f'  <img src="{trophy_url}" alt="GitHub Trophies" />\n'
+        content += "</p>\n\n"
     
-    # Combined GitHub Stats
-    combined_stats_url = get_combined_stats()
-    content += f'  <img src="{combined_stats_url}" alt="GitHub Stats" />\n'
-    
-    # Combined Top Languages
-    combined_langs_url = get_combined_top_languages()
-    content += f'  <img src="{combined_langs_url}" alt="Top Languages" />\n'
-    
-    content += "</p>\n\n"
-    
-    # Combined Streak
-    content += "<p align=\"left\">\n"
-    combined_streak_url = get_combined_streak()
-    content += f'  <img src="{combined_streak_url}" alt="GitHub Streak" />\n'
-    content += "</p>\n\n"
-    
-    # Combined Trophies
-    content += "<p align=\"left\">\n"
-    combined_trophies_url = get_combined_trophies()
-    content += f'  <img src="{combined_trophies_url}" alt="GitHub Trophies" />\n'
-    content += "</p>\n\n"
+    # Organization Statistics (if configured)
+    if ORGANIZATIONS and ORGANIZATIONS != ['org1', 'org2']:
+        content += "<h4 align=\"left\">🏢 Organization Contributions:</h4>\n\n"
+        
+        for org_name in ORGANIZATIONS:
+            if org_name and org_name not in ['org1', 'org2']:
+                org_stats_url = get_organization_stats(org_name)
+                content += f"<p align=\"left\">\n"
+                content += f'  <img src="{org_stats_url}" alt="{org_name} Stats" />\n'
+                content += "</p>\n\n"
     
     # Languages and Tools
     content += """<h3 align="left">Languages and Tools:</h3>
@@ -299,7 +275,10 @@ def main():
             f.write(content)
         
         print("✅ README.md generated successfully!")
-        print("📊 Generated unified statistics from both accounts")
+        if len(USERS) > 1:
+            print("📊 Generated individual statistics for each account")
+        else:
+            print("📊 Generated unified statistics")
         print("🔑 Using separate tokens for each account")
         print(f"👤 Accounts: {', '.join(USERS)}")
         print(f"🏢 Organizations: {', '.join(ORGANIZATIONS)}")
