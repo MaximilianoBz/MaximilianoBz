@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
 """
-Script to inject dynamic GitHub stats into README.md without overwriting the manual content.
+Inject dynamic GitHub stats into README.md without overwriting manual content.
 """
 
 import os
 import requests
 from datetime import datetime
+import re
 
-# Configuration
+# Users configuration
+USERS_ENV = os.getenv('USERS')
 PERSONAL_TOKEN_A = os.getenv('PERSONAL_TOKEN_A')
 PERSONAL_TOKEN_B = os.getenv('PERSONAL_TOKEN_B')
-USERS_ENV = os.getenv('USERS')
-ORGANIZATIONS_ENV = os.getenv('ORGANIZATIONS')
 
-# Users and Organizations
 USERS = [u.strip() for u in USERS_ENV.split(',')] if USERS_ENV else ['MaximilianoBz']
-ORGANIZATIONS = [o.strip() for o in ORGANIZATIONS_ENV.split(',')] if ORGANIZATIONS_ENV else []
 
 def get_github_stats(username, token=None):
-    """Generate GitHub stats URL for a user"""
-    base_url = "https://github-readme-stats.vercel.app/api"
+    url = "https://github-readme-stats.vercel.app/api"
     params = {
         'username': username,
         'show_icons': 'true',
@@ -30,12 +27,11 @@ def get_github_stats(username, token=None):
     }
     if token:
         params['token'] = token
-    response = requests.get(base_url, params=params)
+    response = requests.get(url, params=params)
     return response.url
 
 def get_streak_stats(username, token=None):
-    """Generate GitHub streak URL for a user"""
-    base_url = "https://github-readme-streak-stats.herokuapp.com"
+    url = "https://github-readme-streak-stats.herokuapp.com"
     params = {
         'user': username,
         'theme': 'gruvbox',
@@ -43,12 +39,11 @@ def get_streak_stats(username, token=None):
     }
     if token:
         params['token'] = token
-    response = requests.get(base_url, params=params)
+    response = requests.get(url, params=params)
     return response.url
 
 def get_trophy_stats(username):
-    """Generate GitHub trophy URL for a user"""
-    base_url = "https://github-profile-trophy.vercel.app"
+    url = "https://github-profile-trophy.vercel.app"
     params = {
         'username': username,
         'theme': 'gruvbox',
@@ -56,11 +51,10 @@ def get_trophy_stats(username):
         'no-bg': 'false',
         'margin-w': '4'
     }
-    response = requests.get(base_url, params=params)
+    response = requests.get(url, params=params)
     return response.url
 
 def generate_dynamic_content():
-    """Generate the dynamic stats block for insertion"""
     content = "<!-- STATS_START -->\n"
     for i, username in enumerate(USERS):
         token = PERSONAL_TOKEN_A if i == 0 else PERSONAL_TOKEN_B
@@ -80,9 +74,7 @@ def generate_dynamic_content():
     return content
 
 def main():
-    """Main function to inject dynamic stats into README.md"""
     readme_file = "README.md"
-    
     if not os.path.exists(readme_file):
         print(f"❌ {readme_file} not found.")
         return
@@ -92,13 +84,10 @@ def main():
 
     dynamic_content = generate_dynamic_content()
 
-    # Replace content between markers
-    import re
     pattern = r"<!-- STATS_START -->.*?<!-- STATS_END -->"
     if re.search(pattern, content, flags=re.DOTALL):
         content_new = re.sub(pattern, dynamic_content, content, flags=re.DOTALL)
     else:
-        # If markers not found, append at the end
         content_new = content + "\n\n" + dynamic_content
 
     with open(readme_file, 'w', encoding='utf-8') as f:
