@@ -35,7 +35,24 @@
 ## 📊 GitHub Dynamic Stats
 
 <!-- STATS_START -->
+
+### GitHub Stats for maximilianobz
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=maximilianobz&show_icons=true&theme=gruvbox&hide_border=true&include_all_commits=true&count_private=true&token=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" alt="GitHub Stats - maximilianobz" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=maximilianobz&theme=gruvbox&hide_border=true&token=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" alt="GitHub Streak - maximilianobz" />
+  <img src="https://github-profile-trophy.vercel.app/?username=maximilianobz&theme=gruvbox&no-frame=true&no-bg=false&margin-w=4" alt="GitHub Trophies - maximilianobz" />
+</p>
+
+### GitHub Stats for maximilianobaez
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=maximilianobaez&show_icons=true&theme=gruvbox&hide_border=true&include_all_commits=true&count_private=true&token=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" alt="GitHub Stats - maximilianobaez" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=maximilianobaez&theme=gruvbox&hide_border=true&token=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" alt="GitHub Streak - maximilianobaez" />
+  <img src="https://github-profile-trophy.vercel.app/?username=maximilianobaez&theme=gruvbox&no-frame=true&no-bg=false&margin-w=4" alt="GitHub Trophies - maximilianobaez" />
+</p>
+
+_Last updated: 2025-12-20 06:20:29 UTC_
 <!-- STATS_END -->
+
 
 ---
 
