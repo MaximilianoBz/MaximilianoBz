@@ -1,5 +1,6 @@
 # Hi, I'm Maximiliano Baez 👋  
-**A passionate SRE / DevOps / Cloud Engineer** focused on building scalable, reliable, and automated systems, with solid experience in **Cluster Akka/Pekko** and distributed architectures.
+
+**A passionate SRE / DevOps / Cloud Engineer focused on building scalable, reliable, and automated systems, with solid experience in Cluster Akka/Pekko and distributed architectures.**
 
 ---
 
@@ -13,47 +14,73 @@
 
 ---
 
-## 🔧 Tech Stack
+## ☁️ Cloud & Infrastructure
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" />
+  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
   <img src="https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white" />
   <img src="https://img.shields.io/badge/OpenShift-E01E5A?style=for-the-badge&logo=openshift&logoColor=white" />
+</p>
+
+---
+
+## 🛡️ Service Mesh & Networking
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Istio-000000?style=for-the-badge&logo=istio&logoColor=white" />
+  <img src="https://img.shields.io/badge/Cilium-0B0B0B?style=for-the-badge&logo=cilium&logoColor=white" />
+</p>
+
+---
+
+## 📊 Monitoring, Logging & Observability
+
+<p align="center">
   <img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" />
   <img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" />
+  <img src="https://img.shields.io/badge/OpenTelemetry-DD0031?style=for-the-badge&logo=opentelemetry&logoColor=white" />
+  <img src="https://img.shields.io/badge/ELK%20Stack-005571?style=for-the-badge&logo=elastic&logoColor=white" />
+</p>
+
+---
+
+## 🗄️ Databases & Messaging
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/Helm-0F53BA?style=for-the-badge&logo=helm&logoColor=white" />
-  <img src="https://img.shields.io/badge/Akka/Pekko-1F1F1F?style=for-the-badge&logo=scala&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
 </p>
 
 ---
 
-## 📊 GitHub Dynamic Stats
+## 🧰 Skills & Tools
 
-<!-- STATS_START -->
-
-### GitHub Stats for maximilianobz
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=maximilianobz&show_icons=true&theme=gruvbox&hide_border=true&include_all_commits=true&count_private=true&token=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" alt="GitHub Stats - maximilianobz" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=maximilianobz&theme=gruvbox&hide_border=true&token=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" alt="GitHub Streak - maximilianobz" />
-  <img src="https://github-profile-trophy.vercel.app/?username=maximilianobz&theme=gruvbox&no-frame=true&no-bg=false&margin-w=4" alt="GitHub Trophies - maximilianobz" />
+  <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" />
+  <img src="https://img.shields.io/badge/Akka/Pekko-1F1F1F?style=for-the-badge&logo=scala&logoColor=white" />
+  <img src="https://img.shields.io/badge/Scala-DC322F?style=for-the-badge&logo=scala&logoColor=white" />
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" />
 </p>
-
-### GitHub Stats for maximilianobaez
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=maximilianobaez&show_icons=true&theme=gruvbox&hide_border=true&include_all_commits=true&count_private=true&token=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" alt="GitHub Stats - maximilianobaez" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=maximilianobaez&theme=gruvbox&hide_border=true&token=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" alt="GitHub Streak - maximilianobaez" />
-  <img src="https://github-profile-trophy.vercel.app/?username=maximilianobaez&theme=gruvbox&no-frame=true&no-bg=false&margin-w=4" alt="GitHub Trophies - maximilianobaez" />
-</p>
-
-_Last updated: 2025-12-20 06:20:29 UTC_
-<!-- STATS_END -->
-
 
 ---
 
-*"Reliability is not optional. Automation is not optional. Distributed systems are my playground."* 🚀
+## 📌 Professional Summary
+
+I specialize in:
+- Operating **high-availability cloud environments**  
+- Managing and scaling **Cluster Akka/Pekko** and distributed systems  
+- Implementing **Service Mesh** (Istio), container networking (Cilium), and observability best practices  
+- Centralized **logging & metrics** with ELK, Prometheus & OpenTelemetry  
+- Automating infrastructure and pipelines with **Bash, Terraform, Helm, and GitOps**  
+
+<p align="center">
+  <i>"Reliability is not optional. Automation is not optional. Distributed systems are my playground." 🌟</i>
+</p>
+
+---
+
+<p align="center">
+  _Last updated: 2025‑12‑20_
+</p>
